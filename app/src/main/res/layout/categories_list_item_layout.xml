@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="60dp"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:minWidth="160dp"
+    android:layout_marginTop="16dp"
+    android:background="@drawable/circular_drawable"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <TextView
+            android:id="@+id/tvheader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:text="The Cure for Loneliness"
+            android:letterSpacing="0.1"
+            android:textColor="@color/white"
+            android:textSize="18dp"/>
+
+
+  
+
+
+</LinearLayout>

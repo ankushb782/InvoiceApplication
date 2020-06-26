@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:id="@+id/llLinearLayout"
+    android:clickable="true"
+    android:orientation="vertical" >
+
+    <com.fattmerchant.invoiceapplication.view.NewEpisodeSectionLayout
+        android:id="@+id/llEpisodes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"/>
+    <com.fattmerchant.invoiceapplication.view.ChannelsSectionLayout
+        android:id="@+id/llChannels"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"/>
+    <com.fattmerchant.invoiceapplication.view.CategoriesSectionLayout
+        android:id="@+id/llCategories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"/>
+
+
+</LinearLayout>

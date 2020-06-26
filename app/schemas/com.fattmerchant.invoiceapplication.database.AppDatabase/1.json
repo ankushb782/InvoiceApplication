@@ -1,0 +1,100 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "603c3fc2f03d8e7588eec83575b5e8e9",
+    "entities": [
+      {
+        "tableName": "channel_data",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`ids` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id` TEXT, `latestMedia` TEXT, `mediaCount` INTEGER, `series` TEXT, `slug` TEXT, `categories` TEXT, `title` TEXT, `cover_asseturl` TEXT, `icon_assetthumbnailUrl` TEXT, `icon_asseturl` TEXT, `data_episodemedia` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "ids",
+            "columnName": "ids",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "latestMedia",
+            "columnName": "latestMedia",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "mediaCount",
+            "columnName": "mediaCount",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "series",
+            "columnName": "series",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "slug",
+            "columnName": "slug",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "categories",
+            "columnName": "categories",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "coverAsset.url",
+            "columnName": "cover_asseturl",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "iconAsset.thumbnailUrl",
+            "columnName": "icon_assetthumbnailUrl",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "iconAsset.url",
+            "columnName": "icon_asseturl",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "data.media",
+            "columnName": "data_episodemedia",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "ids"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '603c3fc2f03d8e7588eec83575b5e8e9')"
+    ]
+  }
+}
