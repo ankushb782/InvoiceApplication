@@ -9,9 +9,11 @@ import com.fattmerchant.invoiceapplication.MainActivity
 import com.fattmerchant.invoiceapplication.model.*
 import org.koin.core.KoinContext
 import org.koin.standalone.KoinComponent
+import org.koin.standalone.inject
 
 
-class CommonViewModel(val dataRepository: DataRepository, val context: KoinContext) : ViewModel(), KoinComponent {
+class CommonViewModel() : ViewModel(), KoinComponent {
+    val dataRepository: DataRepository by inject()
 
     var listOfEpisodes = MutableLiveData<List<ChannelData>>()
     var listOfChannels = MutableLiveData<List<ChannelData>>()

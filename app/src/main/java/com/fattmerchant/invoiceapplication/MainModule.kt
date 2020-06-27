@@ -14,7 +14,7 @@ val mainModule = module {
 
     single { createWebService() }
 
-    viewModel { CommonViewModel(get(),koinContext) }
+    viewModel { CommonViewModel() }
 
 }
 
