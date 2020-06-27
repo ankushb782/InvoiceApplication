@@ -33,7 +33,11 @@ class EpisodeListAdapter(private val episodesList: List<MediaData>, val context:
     }
 
     override fun getItemCount(): Int {
-        return episodesList.size
+        if(episodesList.size>6)
+            return 6
+        else{
+            return  episodesList.size
+        }
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {

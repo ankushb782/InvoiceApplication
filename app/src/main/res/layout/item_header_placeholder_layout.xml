@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/llLinearLayout"
+    android:clickable="true"
+    android:layout_marginTop="20dp"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background"
+        android:orientation="vertical"
+        android:paddingBottom="10dp"
+         >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+>
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:background="@color/background_shimmer"
+                android:scaleType="fitCenter" >
+            </ImageView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="18dp" >
+
+
+                    <TextView
+                        android:id="@+id/tvTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:visibility="visible"
+                        android:letterSpacing="0.05"
+                        android:background="@color/background_shimmer"
+                        android:textColor="@color/background_shimmer"
+                        android:text="dmkmvdkvmvmmvdk"
+                         />
+
+
+
+                <TextView
+                    android:id="@+id/tvCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:background="@color/background_shimmer"
+                    android:textColor="@color/background_shimmer"                    android:text="dfghjkhgfd"
+                    android:letterSpacing="0.05"
+                    android:textSize="16dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+
+
+</LinearLayout>

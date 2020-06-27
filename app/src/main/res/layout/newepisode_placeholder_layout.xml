@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="210dp"
+    android:layout_height="wrap_content"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:id="@+id/llCard"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview"
+        android:layout_width="match_parent"
+        android:layout_height="268dp"
+        card_view:cardCornerRadius="16dp"
+        app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="true"
+        android:layout_marginRight="20dp"
+        android:padding="8dp"
+        >
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:background="@color/background_shimmer"
+            android:adjustViewBounds="true"
+            />
+
+    </androidx.cardview.widget.CardView>
+    <TextView
+        android:id="@+id/tvheader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:maxWidth="144dp"
+        android:layout_marginBottom="12dp"
+        android:text="The Cure for Loneliness"
+        android:letterSpacing="0.1"
+        android:textColor="@color/background_shimmer"
+        android:background="@color/background_shimmer"
+        android:textSize="17dp"/>
+    <TextView
+        android:id="@+id/tvChannels"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxWidth="148dp"
+        android:text="MINDVALLEY MENTORING"
+        android:textAllCaps="true"
+        android:letterSpacing="0.1"
+        android:textColor="@color/background_shimmer"
+        android:background="@color/background_shimmer"
+        android:textSize="13dp"/>
+
+
+
+
+</LinearLayout>

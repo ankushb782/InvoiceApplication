@@ -74,7 +74,11 @@ class ChannelsListAdapter(private val channelsList: List<LatestMedia>, val conte
 
 
     override fun getItemCount(): Int {
-        return channelsList.size
+        if(channelsList.size>6)
+        return 6
+        else{
+            return   channelsList.size
+        }
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginLeft="20dp">
+    <TextView
+        android:id="@+id/tvChannels"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:text="Channels"
+        android:textColor="@color/background_shimmer"
+        android:background="@color/background_shimmer"        android:textSize="30dp"/>
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvChannels"
+        android:text="New Episodes"
+        android:letterSpacing="0.1"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/background_shimmer"
+        android:background="@color/background_shimmer"
+        android:textSize="20dp"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal">
+        <include layout="@layout/newepisode_placeholder_layout"/>
+        <include layout="@layout/newepisode_placeholder_layout"/>
+    </LinearLayout>
+
+    <include layout="@layout/item_header_placeholder_layout"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <include layout="@layout/channels_placeholder"/>
+        <include layout="@layout/channels_placeholder"/>
+    </LinearLayout>
+    <include layout="@layout/item_header_placeholder_layout"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <include layout="@layout/channels_placeholder"/>
+        <include layout="@layout/channels_placeholder"/>
+    </LinearLayout>
+    <include layout="@layout/item_header_placeholder_layout"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <include layout="@layout/channels_placeholder"/>
+        <include layout="@layout/channels_placeholder"/>
+    </LinearLayout>
+</LinearLayout>

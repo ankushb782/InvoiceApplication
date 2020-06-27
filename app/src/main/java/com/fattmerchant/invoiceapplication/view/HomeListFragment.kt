@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout.VERTICAL
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.fattmerchant.invoiceapp.CommonViewModel
 import com.fattmerchant.invoiceapplication.R
 import com.fattmerchant.invoiceapplication.adapter.HomeListAdapter
@@ -25,7 +27,7 @@ import java.util.concurrent.Executors
 class HomeListFragment : Fragment() {
 
     private val homeListModel: CommonViewModel by viewModel()
-
+    var  mShimmerViewContainer:ShimmerFrameLayout?=null
     var homeList =  mutableListOf<ChannelData>()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_home_list, container, false)
@@ -35,6 +37,7 @@ class HomeListFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         val swipeRefresh = view?.findViewById<SwipeRefreshLayout>(R.id.swipeRefresh)
         val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerView)
+          mShimmerViewContainer =view?.findViewById<ShimmerFrameLayout>(R.id.shimmer_view_container);
         recyclerView!!.layoutManager = LinearLayoutManager(view!!.context, RecyclerView.VERTICAL, false)
 
         recyclerView!!.addItemDecoration(DividerItemDecoration(requireActivity(),VERTICAL))
@@ -43,6 +46,7 @@ class HomeListFragment : Fragment() {
 
 
         swipeRefresh?.setOnRefreshListener {
+
             homeListModel.getEpisodes()
         }
         homeListAdapter.setItemClickListener(object : HomeListAdapter.ItemClickListener {
@@ -89,6 +93,9 @@ class HomeListFragment : Fragment() {
         @RequiresApi(Build.VERSION_CODES.N)
         fun(categoryList:List<ChannelData>?) {
             categoryList?.let {
+
+                mShimmerViewContainer?.visibility=(View.GONE)
+                mShimmerViewContainer?.stopShimmerAnimation()
                 swipeRefresh?.isRefreshing=false
                 homeList.addAll(categoryList)
                 if (categoryList.size > 0){
@@ -98,6 +105,9 @@ class HomeListFragment : Fragment() {
                         }
                     }
                 }
+
+
+                recyclerView?.visibility=View.VISIBLE
                 homeListAdapter.notifyDataSetChanged()
 
 
@@ -106,9 +116,13 @@ class HomeListFragment : Fragment() {
 
 
         Executors.newSingleThreadExecutor().execute {
+
             homeList.addAll(AppDatabase.getDatabase(requireContext())?.postDao()?.all()!!)
            requireActivity().runOnUiThread {
                if(homeList.size>0) {
+                  mShimmerViewContainer?.stopShimmerAnimation()
+                   mShimmerViewContainer?.setVisibility(View.GONE)
+                   recyclerView?.visibility=View.VISIBLE
                    homeListAdapter.notifyDataSetChanged()
                }else{
                    homeListModel.getEpisodes()
@@ -119,6 +133,17 @@ class HomeListFragment : Fragment() {
         }
 
    }
+
+    override fun onResume() {
+        super.onResume()
+        mShimmerViewContainer?.visibility=(View.VISIBLE)
+        mShimmerViewContainer?.startShimmerAnimation()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mShimmerViewContainer?.stopShimmerAnimation()
+    }
 
 }
 

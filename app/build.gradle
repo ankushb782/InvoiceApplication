@@ -89,4 +89,8 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-reactivestreams:2.2.0'
+
+    // shimmer effect
+    implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
+
 }
