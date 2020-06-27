@@ -83,7 +83,7 @@ class DataRepositoryTest : BaseUTTest() {
                 cont.resume(data)
             }
 
-            override fun onFailure() {
+            override fun onFailure(message:String) {
                 cont.resume(null)
             }
         })
@@ -96,7 +96,7 @@ class DataRepositoryTest : BaseUTTest() {
                 cont.resume(data)
             }
 
-            override fun onFailure() {
+            override fun onFailure(message:String) {
                 cont.resume(null)
             }
         })
@@ -109,7 +109,7 @@ class DataRepositoryTest : BaseUTTest() {
                 cont.resume(data)
             }
 
-            override fun onFailure() {
+            override fun onFailure(message:String) {
                 cont.resume(null)
             }
         })
