@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout.VERTICAL
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -47,7 +48,7 @@ class HomeListFragment : Fragment() {
 
         swipeRefresh?.setOnRefreshListener {
 
-            homeListModel.getEpisodes()
+            homeListModel.getEpisodes(requireActivity())
         }
         homeListAdapter.setItemClickListener(object : HomeListAdapter.ItemClickListener {
             override fun onItemClick(view: View, position: Int,type:String) {
@@ -63,12 +64,6 @@ class HomeListFragment : Fragment() {
                 homeList.clear()
                 homeList.addAll(episodeList)
 
-                if (episodeList.size > 0){
-                    Executors.newSingleThreadExecutor().execute {
-                        AppDatabase.getDatabase(requireContext())?.postDao()?.deleteAll()
-                        AppDatabase.getDatabase(requireContext())?.postDao()?.insertAll(episodeList.get(0))
-                    }
-                }
 
             }
         }))
@@ -77,15 +72,6 @@ class HomeListFragment : Fragment() {
         fun(channelsList:List<ChannelData>?) {
             channelsList?.let {
                 homeList.addAll(channelsList)
-                if (channelsList.size > 0){
-                    Executors.newSingleThreadExecutor().execute {
-
-                        for(i in 0 until channelsList.size){
-                            AppDatabase.getDatabase(requireContext())?.postDao()?.insertAll(channelsList.get(i))
-                        }
-
-                    }
-                }
 
             }
         }))
@@ -98,13 +84,6 @@ class HomeListFragment : Fragment() {
                 mShimmerViewContainer?.stopShimmerAnimation()
                 swipeRefresh?.isRefreshing=false
                 homeList.addAll(categoryList)
-                if (categoryList.size > 0){
-                    Executors.newSingleThreadExecutor().execute {
-                        for(i in 0 until categoryList.size){
-                           AppDatabase.getDatabase(requireContext())?.postDao()?.insertAll(categoryList.get(i))
-                        }
-                    }
-                }
 
 
                 recyclerView?.visibility=View.VISIBLE
@@ -113,7 +92,17 @@ class HomeListFragment : Fragment() {
 
             }
         }))
+        homeListModel.errorData.observe(requireActivity(), Observer(function = @SuppressLint("NewApi")
+        @RequiresApi(Build.VERSION_CODES.N)
+        fun(message:String?) {
+            message?.let {
+                swipeRefresh?.isRefreshing=false
+                mShimmerViewContainer?.visibility=(View.GONE)
+                mShimmerViewContainer?.stopShimmerAnimation()
+           Toast.makeText(requireActivity(),message,Toast.LENGTH_SHORT).show()
 
+            }
+        }))
 
         Executors.newSingleThreadExecutor().execute {
 
@@ -125,12 +114,13 @@ class HomeListFragment : Fragment() {
                    recyclerView?.visibility=View.VISIBLE
                    homeListAdapter.notifyDataSetChanged()
                }else{
-                   homeListModel.getEpisodes()
+                   homeListModel.getEpisodes(requireActivity())
                }
            }
 
 
         }
+
 
    }
 

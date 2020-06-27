@@ -1,11 +1,10 @@
 package com.fattmerchant.invoiceapp
 
 
-import android.os.AsyncTask
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.fattmerchant.invoiceapplication.DataRepository
-import com.fattmerchant.invoiceapplication.MainActivity
 import com.fattmerchant.invoiceapplication.model.*
 import org.koin.core.KoinContext
 import org.koin.standalone.KoinComponent
@@ -16,6 +15,7 @@ class CommonViewModel(val dataRepository: DataRepository, val context: KoinConte
     var listOfEpisodes = MutableLiveData<List<ChannelData>>()
     var listOfChannels = MutableLiveData<List<ChannelData>>()
     var listOfCategory = MutableLiveData<List<ChannelData>>()
+    var errorData = MutableLiveData<String>()
 
     init {
         listOfEpisodes.value = listOf()
@@ -23,40 +23,40 @@ class CommonViewModel(val dataRepository: DataRepository, val context: KoinConte
         listOfCategory.value = listOf()
     }
 
-    fun getEpisodes() {
+    fun getEpisodes(context:Context) {
         dataRepository.getEpisodes(object : DataRepository.OnResponseData {
             override fun onSuccess(data: ChannelData) {
                 var listOfProduct = mutableListOf<ChannelData>()
                 listOfProduct.add(data)
                 listOfEpisodes.value = listOfProduct
 
-                getChannels()
+                getChannels(context)
 
             }
 
-            override fun onFailure() {
-                //REQUEST FAILED
+            override fun onFailure(message: String?) {
+                errorData.value=message
+
             }
-        })
+        },context)
     }
 
-    fun getChannels() {
+    fun getChannels(context:Context) {
         dataRepository.getChannels(object : DataRepository.OnResponseDataChannel {
             override fun onSuccess(data: ChannelsModel) {
                 var listOfProduct = mutableListOf<ChannelData>()
                 listOfProduct.addAll(data.data.channels)
-             //   DatabaseClient.getInstance(context).appDatabase.postDao().insertAll(listOfProduct)
                 listOfChannels.value = listOfProduct
 
-                getCategory()
+                getCategory(context)
             }
+            override fun onFailure(message: String?) {
+                errorData.value=message
 
-            override fun onFailure() {
-                //REQUEST FAILED
             }
-        })
+        },context)
     }
-    fun getCategory() {
+    fun getCategory(context:Context) {
         dataRepository.getCategory(object : DataRepository.OnResponseDataCategory {
             override fun onSuccess(data: CategoryModel) {
                 var listOfProduct = mutableListOf<ChannelData>()
@@ -64,16 +64,18 @@ class CommonViewModel(val dataRepository: DataRepository, val context: KoinConte
                 var channelData:ChannelData= ChannelData(0,null,iconAsset,"",
                     emptyList(),0, emptyList(), "",null,data.data.categories,"")
                 listOfProduct.add(channelData)
-           //     DatabaseClient.getInstance(context).appDatabase.postDao().insertAll(listOfProduct)
                 listOfCategory.value = listOfProduct
 
             }
 
-            override fun onFailure() {
-                //REQUEST FAILED
+            override fun onFailure(message: String?) {
+                errorData.value=message
+
             }
-        })
+        },context)
     }
+
+
 
 
 
