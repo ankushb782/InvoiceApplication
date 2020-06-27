@@ -11,11 +11,12 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview"
         android:layout_width="match_parent"
-        android:layout_height="240dp"
+        android:layout_height="230dp"
         card_view:cardCornerRadius="16dp"
         app:cardPreventCornerOverlap="false"
         app:cardUseCompatPadding="true"
         android:layout_marginRight="20dp"
+        android:layout_marginEnd="20dp"
         android:padding="8dp"
         android:background="@color/background"
         card_view:cardBackgroundColor="@color/background"
@@ -26,7 +27,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
            android:scaleType="fitXY"
-            android:src="@drawable/mindv"
             android:adjustViewBounds="true"
         />
 
@@ -38,10 +38,11 @@
         android:layout_marginTop="10dp"
         android:maxWidth="281dp"
         android:layout_marginBottom="12dp"
-        android:text="The Cure for Loneliness"
+        android:text=""
         android:letterSpacing="0.1"
         android:textColor="@color/white"
-        android:textSize="17dp"/>
+        android:textSize="17sp"
+        card_view:targetApi="lollipop" />
 
 
 

@@ -39,7 +39,8 @@
         android:letterSpacing="0.1"
         android:textColor="@color/background_shimmer"
         android:background="@color/background_shimmer"
-        android:textSize="17dp"/>
+        android:textSize="17sp"
+        card_view:targetApi="lollipop" />
     <TextView
         android:id="@+id/tvChannels"
         android:layout_width="wrap_content"
@@ -50,7 +51,8 @@
         android:letterSpacing="0.1"
         android:textColor="@color/background_shimmer"
         android:background="@color/background_shimmer"
-        android:textSize="13dp"/>
+        android:textSize="13sp"
+        card_view:targetApi="lollipop" />
 
 
 
