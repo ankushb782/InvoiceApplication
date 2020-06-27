@@ -1,10 +1,13 @@
 package com.fattmerchant.invoiceapplication
 
 import com.fattmerchant.invoiceapplication.model.*
+import org.koin.standalone.KoinComponent
+import org.koin.standalone.inject
 import retrofit2.Call
 import retrofit2.Response
 
-class DataRepository(val netWorkApi: NetWorkApi) {
+class DataRepository : KoinComponent {
+    val netWorkApi: NetWorkApi by inject()
 
     fun getEpisodes(responseData: OnResponseData) {
         netWorkApi.getEpisodes().enqueue(object : retrofit2.Callback<ChannelData> {

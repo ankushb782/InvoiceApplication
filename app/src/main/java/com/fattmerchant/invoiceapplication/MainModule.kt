@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 val mainModule = module {
 
-    single { DataRepository(get()) }
+    single { DataRepository() }
 
     single { createWebService() }
 
