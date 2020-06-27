@@ -22,14 +22,19 @@ import com.fattmerchant.invoiceapplication.R
 import com.fattmerchant.invoiceapplication.adapter.HomeListAdapter
 import com.fattmerchant.invoiceapplication.database.AppDatabase
 import com.fattmerchant.invoiceapplication.model.*
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.concurrent.Executors
 
 class HomeListFragment : Fragment() {
 
     private val homeListModel: CommonViewModel by viewModel()
+
+    private val database:AppDatabase by inject()
+
     var  mShimmerViewContainer:ShimmerFrameLayout?=null
     var homeList =  mutableListOf<ChannelData>()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_home_list, container, false)
     }
@@ -42,14 +47,14 @@ class HomeListFragment : Fragment() {
         recyclerView!!.layoutManager = LinearLayoutManager(view!!.context, RecyclerView.VERTICAL, false)
 
         recyclerView!!.addItemDecoration(DividerItemDecoration(requireActivity(),VERTICAL))
-        var homeListAdapter: HomeListAdapter = HomeListAdapter(homeList,requireActivity())
+        val homeListAdapter: HomeListAdapter = HomeListAdapter(homeList,requireActivity())
         recyclerView.adapter = homeListAdapter
-
 
         swipeRefresh?.setOnRefreshListener {
 
-            homeListModel.getEpisodes(requireActivity())
+            homeListModel.getEpisodes()
         }
+
         homeListAdapter.setItemClickListener(object : HomeListAdapter.ItemClickListener {
             override fun onItemClick(view: View, position: Int,type:String) {
 
@@ -63,10 +68,9 @@ class HomeListFragment : Fragment() {
             episodeList?.let {
                 homeList.clear()
                 homeList.addAll(episodeList)
-
-
             }
         }))
+
         homeListModel.listOfChannels.observe(requireActivity(), Observer(function = @SuppressLint("NewApi")
         @RequiresApi(Build.VERSION_CODES.N)
         fun(channelsList:List<ChannelData>?) {
@@ -88,10 +92,9 @@ class HomeListFragment : Fragment() {
 
                 recyclerView?.visibility=View.VISIBLE
                 homeListAdapter.notifyDataSetChanged()
-
-
             }
         }))
+
         homeListModel.errorData.observe(requireActivity(), Observer(function = @SuppressLint("NewApi")
         @RequiresApi(Build.VERSION_CODES.N)
         fun(message:String?) {
@@ -104,21 +107,20 @@ class HomeListFragment : Fragment() {
             }
         }))
 
-        Executors.newSingleThreadExecutor().execute {
+        //homeListModel.getEpisodes()
 
-            homeList.addAll(AppDatabase.getDatabase(requireContext())?.postDao()?.all()!!)
+        Executors.newSingleThreadExecutor().execute {
+            homeList.addAll(database.postDao().all())
            requireActivity().runOnUiThread {
                if(homeList.size>0) {
                   mShimmerViewContainer?.stopShimmerAnimation()
                    mShimmerViewContainer?.setVisibility(View.GONE)
-                   recyclerView?.visibility=View.VISIBLE
+                   recyclerView.visibility=View.VISIBLE
                    homeListAdapter.notifyDataSetChanged()
                }else{
-                   homeListModel.getEpisodes(requireActivity())
+                   homeListModel.getEpisodes()
                }
            }
-
-
         }
 
 

@@ -1,6 +1,8 @@
 package com.fattmerchant.invoiceapplication
 
+import androidx.room.Room
 import com.fattmerchant.invoiceapp.CommonViewModel
+import com.fattmerchant.invoiceapplication.database.AppDatabase
 import okhttp3.OkHttpClient
 import org.koin.android.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
@@ -14,8 +16,12 @@ val mainModule = module {
 
     single { createWebService() }
 
-    viewModel { CommonViewModel(get(),koinContext) }
+    viewModel { CommonViewModel() }
 
+    // Room database instance
+    single { Room.databaseBuilder(get(), AppDatabase::class.java, "channels_db").build() }
+
+    single { get<AppDatabase>().postDao() }
 }
 
 fun createWebService(): NetWorkApi {
