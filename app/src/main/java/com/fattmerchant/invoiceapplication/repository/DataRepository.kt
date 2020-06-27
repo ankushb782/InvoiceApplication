@@ -6,6 +6,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import okhttp3.ResponseBody
 import com.fattmerchant.invoiceapplication.model.*
+import org.koin.core.KoinContext
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.inject
 import retrofit2.Call
@@ -14,9 +15,10 @@ import java.util.concurrent.Executors
 
 
 class DataRepository : KoinComponent {
-    val netWorkApi: NetWorkApi by inject()
+    private val netWorkApi: NetWorkApi by inject()
+    private val database: AppDatabase by inject()
 
-    fun getEpisodes(responseData: OnResponseData,context: Context) {
+    fun getEpisodes(responseData: OnResponseData) {
 
         netWorkApi.getEpisodes().enqueue(object : retrofit2.Callback<ChannelData> {
             override fun onResponse(call: Call<ChannelData>, response: Response<ChannelData>) {
@@ -25,10 +27,9 @@ class DataRepository : KoinComponent {
                     var listOfProduct = mutableListOf<ChannelData>()
                     listOfProduct.add(response.body() as ChannelData)
                     Executors.newSingleThreadExecutor().execute {
-                        AppDatabase.getDatabase(context)?.postDao()?.deleteAll()
+                        database.postDao().deleteAll()
                         for (i in 0 until listOfProduct.size) {
-                            AppDatabase.getDatabase(context)?.postDao()
-                                ?.insertAll(listOfProduct.get(i))
+                            database.postDao().insertAll(listOfProduct.get(i))
                         }
 
                     }
@@ -44,7 +45,7 @@ class DataRepository : KoinComponent {
         })
     }
 
-    fun getChannels(responseData: OnResponseDataChannel,context: Context) {
+    fun getChannels(responseData: OnResponseDataChannel) {
         netWorkApi.getChannels().enqueue(object : retrofit2.Callback<ChannelsModel> {
             override fun onResponse(call: Call<ChannelsModel>, response: Response<ChannelsModel>) {
                 if(response.body()!=null) {
@@ -52,7 +53,7 @@ class DataRepository : KoinComponent {
                 listOfProduct.addAll(response.body()?.data?.channels!!)
                 Executors.newSingleThreadExecutor().execute {
                     for(i in 0 until listOfProduct.size){
-                        AppDatabase.getDatabase(context)?.postDao()?.insertAll(listOfProduct.get(i))
+                        database.postDao().insertAll(listOfProduct.get(i))
                     }
                 }
                 responseData.onSuccess((response.body() as ChannelsModel))
@@ -67,7 +68,7 @@ class DataRepository : KoinComponent {
         })
     }
 
-    fun getCategory(responseData: OnResponseDataCategory,context: Context) {
+    fun getCategory(responseData: OnResponseDataCategory) {
         netWorkApi.getCategory().enqueue(object : retrofit2.Callback<CategoryModel> {
             override fun onResponse(call: Call<CategoryModel>, response: Response<CategoryModel>) {
                 if(response.body()!=null) {
@@ -78,7 +79,7 @@ class DataRepository : KoinComponent {
                 listOfProduct.add(channelData)
                 Executors.newSingleThreadExecutor().execute {
                     for(i in 0 until listOfProduct.size){
-                        AppDatabase.getDatabase(context)?.postDao()?.insertAll(listOfProduct.get(i))
+                        database.postDao().insertAll(listOfProduct.get(i))
                     }
                 }
                 responseData.onSuccess((response.body() as CategoryModel))

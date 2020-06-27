@@ -25,14 +25,14 @@ class CommonViewModel() : ViewModel(), KoinComponent {
         listOfCategory.value = listOf()
     }
 
-    fun getEpisodes(context:Context) {
+    fun getEpisodes() {
         dataRepository.getEpisodes(object : DataRepository.OnResponseData {
             override fun onSuccess(data: ChannelData) {
                 var listOfProduct = mutableListOf<ChannelData>()
                 listOfProduct.add(data)
                 listOfEpisodes.value = listOfProduct
 
-                getChannels(context)
+                getChannels()
 
             }
 
@@ -40,25 +40,25 @@ class CommonViewModel() : ViewModel(), KoinComponent {
                 errorData.value=message
 
             }
-        },context)
+        })
     }
 
-    fun getChannels(context:Context) {
+    fun getChannels() {
         dataRepository.getChannels(object : DataRepository.OnResponseDataChannel {
             override fun onSuccess(data: ChannelsModel) {
                 var listOfProduct = mutableListOf<ChannelData>()
                 listOfProduct.addAll(data.data.channels)
                 listOfChannels.value = listOfProduct
 
-                getCategory(context)
+                getCategory()
             }
             override fun onFailure(message: String?) {
                 errorData.value=message
 
             }
-        },context)
+        })
     }
-    fun getCategory(context:Context) {
+    fun getCategory() {
         dataRepository.getCategory(object : DataRepository.OnResponseDataCategory {
             override fun onSuccess(data: CategoryModel) {
                 var listOfProduct = mutableListOf<ChannelData>()
@@ -74,7 +74,7 @@ class CommonViewModel() : ViewModel(), KoinComponent {
                 errorData.value=message
 
             }
-        },context)
+        })
     }
 
 
