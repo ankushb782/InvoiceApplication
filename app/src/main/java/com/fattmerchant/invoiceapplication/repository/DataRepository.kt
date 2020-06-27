@@ -2,15 +2,19 @@ package com.fattmerchant.invoiceapplication
 
 import android.content.Context
 import com.fattmerchant.invoiceapplication.database.AppDatabase
-import com.fattmerchant.invoiceapplication.model.*
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import okhttp3.ResponseBody
+import com.fattmerchant.invoiceapplication.model.*
+import org.koin.standalone.KoinComponent
+import org.koin.standalone.inject
 import retrofit2.Call
 import retrofit2.Response
 import java.util.concurrent.Executors
 
-class DataRepository(val netWorkApi: NetWorkApi) {
+
+class DataRepository : KoinComponent {
+    val netWorkApi: NetWorkApi by inject()
 
     fun getEpisodes(responseData: OnResponseData,context: Context) {
 
