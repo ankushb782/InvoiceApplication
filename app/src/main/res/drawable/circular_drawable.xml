@@ -5,7 +5,12 @@
         android:color="@color/header" />
 
     <solid android:color="@color/header" />
-
+    <gradient
+        android:angle="45"
+        android:endColor="@color/header"
+        android:centerColor="@color/header"
+        android:startColor="@color/header"
+        android:type="linear" />
 
     <corners android:radius="200dp" />
 </shape>
