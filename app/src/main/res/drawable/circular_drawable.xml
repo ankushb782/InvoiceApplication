@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android" >
-    <stroke
-        android:width="1dp"
-        android:color="@color/header" />
-
-    <solid android:color="@color/header" />
-    <gradient
-        android:angle="45"
-        android:endColor="@color/header"
-        android:centerColor="@color/header"
-        android:startColor="@color/header"
-        android:type="linear" />
-
-    <corners android:radius="200dp" />
-</shape>
+<vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="160dp"
+    android:height="60dp"
+    android:viewportWidth="160"
+    android:viewportHeight="60"
+    >
+    <group>
+        <clip-path
+            android:pathData="M30 0H130C146.569 0 160 13.4315 160 30C160 46.5685 146.569 60 130 60H30C13.4315 60 0 46.5685 0 30C0 13.4315 13.4315 0 30 0Z"
+            />
+        <path
+            android:pathData="M0 0V60H160V0"
+            android:fillColor="#3395989D"
+            />
+    </group>
+</vector>

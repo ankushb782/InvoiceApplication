@@ -36,11 +36,10 @@
         android:layout_marginTop="10dp"
         android:maxWidth="144dp"
         android:layout_marginBottom="12dp"
-        android:text="The Cure for Loneliness"
-        android:letterSpacing="0.1"
+        android:text=""
         android:background="@color/background_shimmer"
         android:textColor="@color/background_shimmer"
-        android:textSize="17dp"/>
+        android:textSize="17sp"/>
 
 
 

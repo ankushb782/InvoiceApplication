@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
-        android:text="Channels"
+        android:text=""
         android:textColor="@color/background_shimmer"
         android:background="@color/background_shimmer"        android:textSize="30dp"/>
     <TextView
@@ -17,12 +17,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvChannels"
-        android:text="New Episodes"
+        android:text=""
         android:letterSpacing="0.1"
         android:layout_marginTop="30dp"
         android:textColor="@color/background_shimmer"
         android:background="@color/background_shimmer"
-        android:textSize="20dp"/>
+        android:textSize="20sp"/>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

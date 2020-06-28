@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     android:id="@+id/llLinearLayout"
-    android:clickable="true"
     android:orientation="vertical" >
 
     <com.fattmerchant.invoiceapplication.view.NewEpisodeSectionLayout

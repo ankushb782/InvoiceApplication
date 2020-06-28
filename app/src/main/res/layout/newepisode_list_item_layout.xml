@@ -38,20 +38,18 @@
         android:layout_marginTop="10dp"
         android:maxWidth="144dp"
         android:layout_marginBottom="12dp"
-        android:text="The Cure for Loneliness"
-        android:letterSpacing="0.1"
+        android:text=""
         android:textColor="@color/white"
-        android:textSize="17dp"/>
+        android:textSize="17sp"/>
     <TextView
         android:id="@+id/tvChannels"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:maxWidth="148dp"
-        android:text="MINDVALLEY MENTORING"
+        android:text=""
         android:textAllCaps="true"
-        android:letterSpacing="0.1"
         android:textColor="@color/header"
-        android:textSize="13dp"/>
+        android:textSize="13sp"/>
 
 
 </LinearLayout>

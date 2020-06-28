@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/llLinearLayout"
@@ -40,14 +41,14 @@
                         android:id="@+id/tvTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="20dp"
+                        android:textSize="20sp"
                         android:textStyle="bold"
                         android:visibility="visible"
-                        android:letterSpacing="0.05"
+                        android:letterSpacing="0.01"
                         android:background="@color/background_shimmer"
                         android:textColor="@color/background_shimmer"
-                        android:text="dmkmvdkvmvmmvdk"
-                         />
+                        android:text="Testing testing"
+                        tools:targetApi="lollipop" />
 
 
 
@@ -59,7 +60,8 @@
                     android:background="@color/background_shimmer"
                     android:textColor="@color/background_shimmer"                    android:text="dfghjkhgfd"
                     android:letterSpacing="0.05"
-                    android:textSize="16dp" />
+                    android:textSize="16sp"
+                    tools:targetApi="lollipop" />
             </LinearLayout>
         </LinearLayout>
 

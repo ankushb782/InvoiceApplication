@@ -15,6 +15,7 @@
         card_view:cardCornerRadius="16dp"
         app:cardPreventCornerOverlap="false"
         app:cardUseCompatPadding="true"
+        android:layout_marginRight="20dp"
         android:layout_marginEnd="20dp"
         android:padding="8dp"
         android:background="@color/background"
@@ -27,7 +28,7 @@
             android:layout_height="match_parent"
            android:scaleType="fitXY"
             android:adjustViewBounds="true"
-            android:contentDescription="Image" />
+        />
 
     </androidx.cardview.widget.CardView>
     <TextView
@@ -40,8 +41,7 @@
         android:text=""
         android:letterSpacing="0.1"
         android:textColor="@color/white"
-        android:textSize="17sp"
-        card_view:targetApi="lollipop" />
+        android:textSize="17dp"/>
 
 
 
