@@ -83,22 +83,29 @@ class ChannelsListAdapter(private val channelsList: List<LatestMedia>, val conte
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         viewHolder.tvheader?.text = channelsList[position].title
-
+        var itemWidth=0.0
         if(channelsList[position].type==null){
-            val itemWidth = screenWidth / 1.13
-            val lp = viewHolder.llCard.layoutParams
-                lp.width = itemWidth.toInt()
-                viewHolder.itemView.llCard.layoutParams = lp
+             itemWidth = screenWidth / 1.13
+
+        }else{
+             itemWidth = screenWidth / 2.18
         }
+
+        val lp = viewHolder.llCard.layoutParams
+        lp.width = itemWidth.toInt()
+        viewHolder.itemView.llCard.layoutParams = lp
 
         var requestOptions = RequestOptions()
         requestOptions = requestOptions.transforms(CenterCrop(), RoundedCorners(16))
 
-        Glide.with(context).
-        load(channelsList[position].coverAsset.url).
-        diskCacheStrategy(DiskCacheStrategy.ALL).
-        apply(requestOptions).
-        into(viewHolder.image)
+        if(channelsList[position].coverAsset.url!=null){
+            Glide.with(context).
+            load(channelsList[position].coverAsset.url).
+            diskCacheStrategy(DiskCacheStrategy.ALL).
+            apply(requestOptions).
+            into(viewHolder.image)
+        }
+
 
     }
 

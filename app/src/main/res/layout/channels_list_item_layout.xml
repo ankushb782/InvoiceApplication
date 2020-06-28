@@ -41,6 +41,7 @@
         android:letterSpacing="0.1"
         android:textColor="@color/white"
         android:textSize="17sp"
+        android:fontFamily="@font/roboto_medium"
         card_view:targetApi="lollipop" />
 
 

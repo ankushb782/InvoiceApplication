@@ -36,7 +36,7 @@ class CommonViewModelTest: BaseUTTest(){
     val mDispatcher = Dispatchers.Unconfined
 
     val mParam = "1"
-    val mNextValue = "https://swapi.co/api/people/?page=2"
+    val mNextValue = ""
 
     @Before
     fun start(){

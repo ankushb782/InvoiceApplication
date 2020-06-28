@@ -110,17 +110,19 @@ class HomeListFragment : Fragment() {
         //homeListModel.getEpisodes()
 
         Executors.newSingleThreadExecutor().execute {
-            homeList.addAll(database.postDao().all())
-           requireActivity().runOnUiThread {
-               if(homeList.size>0) {
-                  mShimmerViewContainer?.stopShimmerAnimation()
-                   mShimmerViewContainer?.setVisibility(View.GONE)
-                   recyclerView.visibility=View.VISIBLE
-                   homeListAdapter.notifyDataSetChanged()
-               }else{
-                   homeListModel.getEpisodes()
-               }
-           }
+            if(isAdded()) {
+                homeList.addAll(database.postDao().all())
+                requireActivity().runOnUiThread {
+                    if (homeList.size > 0) {
+                        mShimmerViewContainer?.stopShimmerAnimation()
+                        mShimmerViewContainer?.setVisibility(View.GONE)
+                        recyclerView.visibility = View.VISIBLE
+                        homeListAdapter.notifyDataSetChanged()
+                    } else {
+                        homeListModel.getEpisodes()
+                    }
+                }
+            }
         }
 
 

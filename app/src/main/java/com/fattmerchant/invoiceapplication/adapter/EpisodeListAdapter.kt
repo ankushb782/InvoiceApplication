@@ -17,6 +17,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.fattmerchant.invoiceapplication.MainActivity
 import com.fattmerchant.invoiceapplication.R
 import com.fattmerchant.invoiceapplication.model.MediaData
+import kotlinx.android.synthetic.main.newepisode_list_item_layout.view.*
 
 
 class EpisodeListAdapter(private val episodesList: List<MediaData>, val context: Context) :
@@ -42,22 +43,21 @@ class EpisodeListAdapter(private val episodesList: List<MediaData>, val context:
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         viewHolder.tvheader?.text = episodesList[position].title
-        viewHolder.tvChannels?.text = episodesList[position].channel.toString()
-        val itemWidth = screenWidth / 2.13
+        viewHolder.tvChannels?.text = episodesList[position].channel.title
+        val itemWidth = screenWidth / 2.18
 
         val lp = viewHolder.llCard.layoutParams
-       // lp.width = itemWidth.toInt()
-      //  viewHolder.itemView.llCard.layoutParams = lp
+        lp.width = itemWidth.toInt()
+        viewHolder.itemView.llCard.layoutParams = lp
 
         var requestOptions = RequestOptions()
         requestOptions = requestOptions.transforms(CenterCrop(), RoundedCorners(16))
 
-        Glide.with(context).
-        load(episodesList[position].coverAsset?.url).
-        diskCacheStrategy(DiskCacheStrategy.ALL).
-        apply(requestOptions).
-        into(viewHolder.image)
-
+        if(episodesList[position].coverAsset!=null) {
+            Glide.with(context).load(episodesList[position].coverAsset?.url)
+                .diskCacheStrategy(DiskCacheStrategy.ALL).apply(requestOptions)
+                .into(viewHolder.image)
+        }
 
     }
 
