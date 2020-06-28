@@ -42,7 +42,7 @@ class HomeListFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val swipeRefresh = view?.findViewById<SwipeRefreshLayout>(R.id.swipeRefresh)
-        val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerView)
+        val recyclerView = view?.findViewById<RecyclerView>(R.id.main_recyclerView)
           mShimmerViewContainer =view?.findViewById<ShimmerFrameLayout>(R.id.shimmer_view_container);
         recyclerView!!.layoutManager = LinearLayoutManager(view!!.context, RecyclerView.VERTICAL, false)
 
@@ -68,6 +68,12 @@ class HomeListFragment : Fragment() {
             episodeList?.let {
                 homeList.clear()
                 homeList.addAll(episodeList)
+
+                mShimmerViewContainer?.visibility=(View.GONE)
+                mShimmerViewContainer?.stopShimmerAnimation()
+                swipeRefresh?.isRefreshing=false
+                recyclerView?.visibility=View.VISIBLE
+                homeListAdapter.notifyDataSetChanged()
             }
         }))
 
@@ -77,6 +83,11 @@ class HomeListFragment : Fragment() {
             channelsList?.let {
                 homeList.addAll(channelsList)
 
+                mShimmerViewContainer?.visibility=(View.GONE)
+                mShimmerViewContainer?.stopShimmerAnimation()
+                swipeRefresh?.isRefreshing=false
+                recyclerView?.visibility=View.VISIBLE
+                homeListAdapter.notifyDataSetChanged()
             }
         }))
         homeListModel.listOfCategory.observe(requireActivity(), Observer(function = @SuppressLint("NewApi")
