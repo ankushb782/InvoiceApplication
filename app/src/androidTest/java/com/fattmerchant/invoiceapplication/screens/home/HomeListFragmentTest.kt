@@ -14,6 +14,7 @@ import com.fattmerchant.invoiceapplication.MainActivity
 import com.fattmerchant.invoiceapplication.R
 import com.fattmerchant.invoiceapplication.adapter.HomeListAdapter
 import com.fattmerchant.invoiceapplication.base.BaseUITest
+import com.fattmerchant.invoiceapplication.database.AppDatabase
 import com.fattmerchant.invoiceapplication.di.generateTestAppComponent
 import com.fattmerchant.invoiceapplication.helpers.recyclerItemAtPosition
 import com.fattmerchant.invoiceapplication.view.HomeListFragment
@@ -39,8 +40,10 @@ class HomeListFragmentTest : BaseUITest() {
     //Inject Mockwebserver created with koin
     val  mMockWebServer : MockWebServer by inject()
 
+    private val database: AppDatabase by inject()
+
+
     val mEpisodeNameTestOne = "Conscious Parenting"
-    val mEpisodeNameTestTwo = "Recorded Live Calls: Intellectual Life"
     val mChannelTestOne = "Coaching Mastery by Evercoach"
     val mCategoryTestOne = "Career"
     val mCategoryTestTwo = "Spiritual"
@@ -49,6 +52,7 @@ class HomeListFragmentTest : BaseUITest() {
     fun start(){
         super.setUp()
         loadKoinModules(generateTestAppComponent(getMockWebServerUrl()).toMutableList())
+        database.postDao().deleteAll()
     }
 
     @Test

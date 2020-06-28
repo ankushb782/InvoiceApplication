@@ -2,11 +2,15 @@ package com.fattmerchant.invoiceapplication.base
 
 import android.util.Log
 import androidx.test.platform.app.InstrumentationRegistry
+import com.fattmerchant.invoiceapplication.database.AppDatabase
+import com.fattmerchant.invoiceapplication.database.DatabaseDao
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
 import org.junit.Before
+import org.koin.android.ext.android.inject
 import org.koin.standalone.StandAloneContext.stopKoin
+import org.koin.standalone.inject
 import org.koin.test.KoinTest
 import java.io.BufferedReader
 import java.io.Reader
@@ -17,7 +21,6 @@ abstract class BaseUITest : KoinTest {
      * For MockWebServer instance
      */
     private lateinit var mockServer: MockWebServer
-
 
     /**
      * Default, let server be shut down
