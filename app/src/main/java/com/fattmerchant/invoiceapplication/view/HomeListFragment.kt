@@ -42,7 +42,7 @@ class HomeListFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val swipeRefresh = view?.findViewById<SwipeRefreshLayout>(R.id.swipeRefresh)
-        val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerView)
+        val recyclerView = view?.findViewById<RecyclerView>(R.id.main_recyclerView)
           mShimmerViewContainer =view?.findViewById<ShimmerFrameLayout>(R.id.shimmer_view_container);
         recyclerView!!.layoutManager = LinearLayoutManager(view!!.context, RecyclerView.VERTICAL, false)
 
@@ -68,6 +68,12 @@ class HomeListFragment : Fragment() {
             episodeList?.let {
                 homeList.clear()
                 homeList.addAll(episodeList)
+
+                mShimmerViewContainer?.visibility=(View.GONE)
+                mShimmerViewContainer?.stopShimmerAnimation()
+                swipeRefresh?.isRefreshing=false
+                recyclerView?.visibility=View.VISIBLE
+                homeListAdapter.notifyDataSetChanged()
             }
         }))
 
@@ -77,6 +83,11 @@ class HomeListFragment : Fragment() {
             channelsList?.let {
                 homeList.addAll(channelsList)
 
+                mShimmerViewContainer?.visibility=(View.GONE)
+                mShimmerViewContainer?.stopShimmerAnimation()
+                swipeRefresh?.isRefreshing=false
+                recyclerView?.visibility=View.VISIBLE
+                homeListAdapter.notifyDataSetChanged()
             }
         }))
         homeListModel.listOfCategory.observe(requireActivity(), Observer(function = @SuppressLint("NewApi")
@@ -107,21 +118,21 @@ class HomeListFragment : Fragment() {
             }
         }))
 
-        //homeListModel.getEpisodes()
+        homeListModel.getEpisodes()
 
-        Executors.newSingleThreadExecutor().execute {
-            homeList.addAll(database.postDao().all())
-           requireActivity().runOnUiThread {
-               if(homeList.size>0) {
-                  mShimmerViewContainer?.stopShimmerAnimation()
-                   mShimmerViewContainer?.setVisibility(View.GONE)
-                   recyclerView.visibility=View.VISIBLE
-                   homeListAdapter.notifyDataSetChanged()
-               }else{
-                   homeListModel.getEpisodes()
-               }
-           }
-        }
+//        Executors.newSingleThreadExecutor().execute {
+//            homeList.addAll(database.postDao().all())
+//           requireActivity().runOnUiThread {
+//               if(homeList.size>0) {
+//                  mShimmerViewContainer?.stopShimmerAnimation()
+//                   mShimmerViewContainer?.setVisibility(View.GONE)
+//                   recyclerView.visibility=View.VISIBLE
+//                   homeListAdapter.notifyDataSetChanged()
+//               }else{
+//                   homeListModel.getEpisodes()
+//               }
+//           }
+//        }
 
 
    }
